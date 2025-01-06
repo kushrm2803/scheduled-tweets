@@ -1,0 +1,32 @@
+<div class="bg-light shadow-sm p-4 rounded mt-5">
+    <div class="d-flex align-items-center justify-content-between mb-4">
+    <h1 class="fw-bold text-dark">Twitter Account</h1>
+    <% if @twitter_account.any? %>
+        <%= button_to "Disconnect from X.com", @twitter_account.first, data: { turbo_confirm: "Are you sure you want to disconnect?" }, method: :delete, class: "btn btn-outline-danger" %>
+    <% else %>
+        <%= button_to "Connect to X.com", "/auth/twitter", data: { turbo: "false" }, method: :post, class: "btn btn-success" %>
+    <% end %>
+    </div>
+</div>
+
+<% if @twitter_account.any? %>
+  <div class="card shadow-sm m-3">
+    <div class="card-body">
+      <div class="d-flex align-items-center">
+        <div class="me-3">
+          <%= image_tag @twitter_account.first.image, class: "rounded-circle", alt: "Twitter Profile Image", size: "80x80" %>
+        </div>
+        <div>
+          <h5 class="mb-0">
+            <%= link_to "@#{@twitter_account.first.username}", "http://x.com/#{@twitter_account.first.username}", target: :_blank, class: "text-primary fw-bold text-decoration-none" %>
+          </h5>
+          <p class="mb-0 text-muted">Connected as <strong><%= @twitter_account.first.username %></strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="alert alert-info">
+    No Twitter account connected. Please connect to start scheduling tweets.
+  </div>
+<% end %>

@@ -1,0 +1,30 @@
+<div class="col-md-6 mb-4">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <div class="d-flex align-items-center mb-3">
+        <%= image_tag tweet.twitter_account.image, class: "rounded-circle me-3", alt: tweet.twitter_account.username, width: 50, height: 50 %>
+        <div>
+          <%= link_to "@#{tweet.twitter_account.username}", "http://x.com/#{tweet.twitter_account.username}", class: "text-decoration-none fw-bold", target: :_blank %>
+        </div>
+      </div>
+
+      <% if tweet.published? %>
+        <blockquote class="twitter-tweet" data-theme="dark">
+          <p lang="en" dir="ltr">
+            <%= tweet.body %>
+          </p>
+          &mdash; <%= tweet.twitter_account.username %>
+          <a href="https://twitter.com/<%= tweet.twitter_account.username %>/status/<%= tweet.tweet_id %>?ref_src=twsrc%5Etfw">
+            <%= tweet.created_at.strftime("%b %d, %Y") %>
+          </a>
+        </blockquote>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <%= link_to "View Tweet on X", "https://x.com/#{tweet.twitter_account.username}/status/#{tweet.tweet_id}", class: "btn btn-outline-success btn-sm", target: :_blank %>
+      <% else %>
+        <p class="mb-3 text-dark"><%= tweet.body %></p>
+        <p class="text-muted">Scheduled for: <%= l tweet.publish_at, format: :long %></p>
+        <%= link_to "Edit Tweet", edit_tweet_path(tweet), class: "btn btn-outline-dark btn-sm" %>
+      <% end %>
+    </div>
+  </div>
+</div>

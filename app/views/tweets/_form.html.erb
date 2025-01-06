@@ -1,0 +1,27 @@
+<div class="bg-light shadow-sm p-4 rounded">
+
+  <%= form_with model: tweet do |form| %>
+    <%= render "shared/form_errors", form: form %>
+
+    <div class="mb-2">
+      <%= form.label :twitter_account_id, class: "form-label fw-semibold" %>
+      <%= form.collection_select :twitter_account_id, Current.user.twitter_account, :id, :username, {}, { class: "form-control form-control-lg" } %>
+    </div>
+
+    <div class="mb-2">
+      <%= form.label :body, class: "form-label fw-semibold" %>
+      <%= form.text_area :body, class: "form-control form-control-lg", placeholder: "What's on your mind?" %>
+    </div>
+
+    <div class="mb-2">
+      <%= form.label :publish_at, class: "form-label fw-semibold" %>
+      <%= form.datetime_select :publish_at, default: Time.zone.now, class: "form-control form-control-lg" %>
+    </div>
+
+    <%= form.submit "Schedule", class: "btn btn-dark btn-me mt-4 px-5" %>
+
+    <% if form.object.persisted? %>
+      <%= link_to "Delete", form.object, data: { turbo_confirm: 'Are you sure?', "turbo-method": :delete }, class: "btn btn-outline-danger btn-me mt-4 px-5" %>
+    <% end %>
+  <% end %>
+</div>

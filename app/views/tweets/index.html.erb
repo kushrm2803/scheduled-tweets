@@ -1,0 +1,16 @@
+<div class="bg-light shadow-sm p-4 rounded mt-5">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h1 class="fw-bold text-dark">Queued-Tweets</h1>
+    <% if Current.user.twitter_account.any? %>
+      <%= link_to "Schedule a Tweet", new_tweet_path, class: "btn btn-dark px-4 py-2" %>
+    <% end %>
+
+    <% if Current.user.twitter_account.none? %>
+      <%= button_to "Connect to X.com", "/auth/twitter", data: { turbo: "false" }, method: :post, class: "btn btn-dark px-4 py-2" %>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <%= render @tweets %>
+  </div>
+</div>

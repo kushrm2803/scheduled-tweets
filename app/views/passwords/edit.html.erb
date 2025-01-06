@@ -1,0 +1,26 @@
+<div class="bg-light shadow-sm p-5 rounded">
+  <h1 class="display-6 fw-bold mb-4">Edit Password</h1>
+
+  <%= form_with model: Current.user, url: password_path do |form| %>
+    <% if form.object.errors.any? %>
+      <div class="alert alert-danger">
+        <h5 class="fw-bold">Error:</h5>
+        <% form.object.errors.full_messages.each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="mb-4">
+      <%= form.label :password, class: "form-label fw-semibold" %>
+      <%= form.password_field :password, class: "form-control form-control-lg", placeholder: "Enter new password" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :password_confirmation, class: "form-label fw-semibold" %>
+      <%= form.password_field :password_confirmation, class: "form-control form-control-lg", placeholder: "Confirm new password" %>
+    </div>
+
+    <%= form.submit "Update Password", class: "btn btn-dark btn-lg px-5" %>
+  <% end %>
+</div>

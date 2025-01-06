@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid"> <!-- Changed from "container" to "container-fluid" to make the navbar stretch fully -->
+    <a class="navbar-brand fw-bold" href="/">
+      <span class="text-primary">S</span>cheduled-<span class="text-primary">T</span>weets
+    </a>
+    <button 
+      class="navbar-toggler" 
+      type="button" 
+      data-bs-toggle="collapse" 
+      data-bs-target="#navbarNav" 
+      aria-controls="navbarNav" 
+      aria-expanded="false" 
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <%= link_to "About", about_path, class: "nav-link #{current_page?(about_path) ? 'fw-bold text-primary' : 'text-light'}" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Tweets", tweets_path, class: "nav-link #{current_page?(tweets_path) ? 'fw-bold text-primary' : 'text-light'}" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Twitter Account", twitter_accounts_path, class: "nav-link #{current_page?(twitter_accounts_path) ? 'fw-bold text-primary' : 'text-light'}" %>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ms-auto d-flex align-items-center">
+        <% if Current.user %>
+          <li class="nav-item">
+            <span class="navbar-text">
+              Logged in as: <strong class="text-danger"><%= Current.user.email %></strong>
+            </span>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Edit Password", password_path, class: "nav-link #{current_page?(password_path) ? 'fw-bold text-primary px-3' : 'text-light px-3'}"%>
+          </li>
+          <li class="nav-item">
+            <%= button_to "Logout", logout_path, data: { turbo_confirm: 'Are you sure?' }, method: :delete, class: "btn btn-outline-danger btn-sm px-4", type: "button" %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Sign-Up", sign_up_path, class: "btn btn-outline-light btn-sm px-4 me-2" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sign-In", sign_in_path, class: "btn btn-light btn-sm px-4" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

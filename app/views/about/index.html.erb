@@ -1,0 +1,31 @@
+<div class="container text-center py-5">
+  <div class="bg-light shadow-sm p-5 rounded">
+    <h1><%= @message %></h1>
+    <hr class="my-4" style="border: 1px solidrgb(23, 26, 29); width: 100%;">
+    <p class="mt-3 text-muted fs-5">
+      Dive into your tweet scheduling journey! Manage your posts effortlessly and stay connected.
+    </p>
+    
+    <% if Current.user %>
+      <% if Current.user.twitter_account.none? %>
+        <div class="mt-4">
+          <%= button_to "Connect to X.com", "/auth/twitter", data: { turbo: "false" }, method: :post, class: "btn btn-dark btn-lg px-4" %>
+        </div>
+      <% else %>
+        <div class="mt-4 d-flex justify-content-center gap-3">
+          <%= link_to "Schedule a Tweet", new_tweet_path, class: "btn btn-dark btn-lg px-4" %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="mt-4">
+        <p class="text-danger fw-semibold">
+          You must <%= link_to "log in", sign_in_path, class: "text-decoration-underline text-danger" %> to access this feature.
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<footer class="mt-5 text-muted text-center small">
+  <p>Crafted with ❤️ for your social media needs.<p>
+</footer>

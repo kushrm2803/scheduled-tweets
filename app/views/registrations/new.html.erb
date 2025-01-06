@@ -1,0 +1,24 @@
+<div class="bg-light shadow-sm p-4 rounded">
+  <h1 class="display-6 fw-bold mb-4">Sign Up</h1>
+
+  <%= form_with model: @user, url: sign_up_path do |form| %>
+    <%= render "shared/form_errors", form: form %>
+
+    <div class="mb-2">
+      <%= form.label :email, class: "form-label fw-semibold" %>
+      <%= form.text_field :email, class: "form-control form-control-lg", placeholder: "steve123@gmail.com" %>
+    </div>
+
+    <div class="mb-2">
+      <%= form.label :password, class: "form-label fw-semibold" %>
+      <%= form.password_field :password, class: "form-control form-control-lg", placeholder: "Enter password" %>
+    </div>
+
+    <div class="mb-2">
+      <%= form.label :password_confirmation, class: "form-label fw-semibold" %>
+      <%= form.password_field :password_confirmation, class: "form-control form-control-lg", placeholder: "Confirm password" %>
+    </div>
+
+    <%= form.submit "Get Started", class: "btn btn-dark btn-lg px-5 mt-4" %>
+  <% end %>
+</div>
